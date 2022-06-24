@@ -1,7 +1,5 @@
 import filehandler as fh
 import instrparser
-import os
-import sys
 
 class Conductor(object):
     def __init__(self):
@@ -49,7 +47,6 @@ class Conductor(object):
             gkrecord_alt chnexport "record_alt", 1
             gkreset_alt chnexport "reset_alt", 1
             gksource_alt chnexport "source_alt", 1
-            gkfile_alt chnexport "file_alt", 1
             ; data buffers -- 100 Files maximum
             gilen[] init 100
             gichn[] init 100
@@ -66,8 +63,6 @@ class Conductor(object):
         glen_arrayinit = []
         stereo_ftgen = []
         for i,f in enumerate(self.filehandler.files):
-            if sys.platform.startswith('win'):
-              f = f.replace("\\","/")  #For Windows paths
             #fsco_lines.append("f " + str(i + 1) + " 0 0 1 \"" + f + "\" 0 0 0\n")
             fsco_lines.append("f " + str(400 + i) + " 0 0 1 \"" + f + "\" 0 0 1\n")
             glen_arrayinit.append("gSname[" + str(i) +"] = \"" + f + "\"\n")
